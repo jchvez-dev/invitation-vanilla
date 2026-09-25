@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <main class="scene">
+        <div id="book" class="book">
+            <div class="spine"></div>
+
+            <div id="coverPage" class="page cover-page">
+                <div class="cover-front">
+                    <img src="./img/cover.png" alt="Cover" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/320x520/ffb6c1/ffffff?text=cover.png'">
+                </div>
+                <div class="cover-back">
+                    <img src="./img/candles.png" alt="Candles" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/320x520/ffd1dc/d63384?text=candles.png'">
+                </div>
+            </div>
+
+            <div class="page page-right">
+                <div class="envelope-wrapper">
+                    <img id="envelopeImg" src="./img/envelope.png" alt="Envelope" class="w-full h-full object-cover cursor-pointer" onerror="this.src='https://placehold.co/320x520/ffe3ec/d63384?text=envelope.png'">
+                </div>
+            </div>
+        </div>
+        <div id="letterSlide" class="letter-slide p-1">
+            <div class="relative w-full h-full overflow-hidden rounded-lg p-4">
+                <img src="./img/letter.png" alt="Letter" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x480/fff0f5/d63384?text=letter.png'">
+            </div>
+        </div>
+    </main>
+</body>
+<script type="module" src="./index.js"></script>
+</html>

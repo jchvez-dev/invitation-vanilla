@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    font-family: 'Fredoka', cursive, sans-serif;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffe3ec 50%, #e8dff5 100%);
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D Scene container */
+.scene {
+    perspective: 1800px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D Book structure */
+.book {
+    width: min(45%, 400px);
+    aspect-ratio: 1080 / 1920;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+/* Shift right when open so spine centers nicely */
+.book.open {
+    transform: translateX(50%);
+}
+
+/* Shared page styles - NOTA: quitamos overflow:hidden aquí para evitar cortar render 3D */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.page img,
+.letter-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Fixed Inner Right Page */
+.page-right {
+    z-index: 1;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    box-shadow: 8px 12px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Flippable Front Cover Page */
+.cover-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    background-color: transparent;
+}
+
+.book.open .cover-page {
+    transform: rotateY(-180deg);
+}
+
+/* Front Cover (cover.png) */
+.cover-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    overflow: hidden;
+    transform: rotateY(0deg);
+}
+
+/* Inside Left Page (candles.png) */
+.cover-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(180deg);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Spine detail */
+.spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Inner envelope wrapper */
+.envelope-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Sliding letter inside right page */
+.letter-slide {
+    position: absolute;
+    aspect-ratio: 1080 / 1920;
+    height: 10px;
+    top: 40%;
+    left: 50%;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.letter-slide.extracted {
+    opacity: 1;
+    top: 50%;
+    height: 90vh;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    .letter-slide.extracted {
+        width: 90vw;
+        height: auto;
+    }
+}
