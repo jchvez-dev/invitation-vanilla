@@ -41,15 +41,38 @@ function setLetterState(extracted) {
 // ELements
 const body = document.body;
 const book = document.getElementById('book');
+const scene = document.getElementById('scene');
+const images = Array.from(scene.querySelectorAll('img'));
+const loading = document.getElementById('loading');
 const envelopeImg = document.getElementById('envelopeImg');
 const letterSlide = document.getElementById('letterSlide');
 
+//promise
+const allImagesLoaded = images.map((img) => {
+  return new Promise((resolve) => {
+    // is already on cache
+    if (img.complete) {
+      resolve();
+    } else {
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    }
+  });
+});
 
 // Events
 document.addEventListener('DOMContentLoaded', () => {
     // set background
     body.style.backgroundImage = getBearGradient(selectedBear);
     letterSlide.style.background = selectedBear.bgCard;
+    loading.style.background = `${selectedBear.bgCard}90`;
+    
+    Promise.all(allImagesLoaded).then(() => {
+        loading.classList.remove("flex");
+        loading.classList.add("hidden");
+        scene.classList.remove("hidden");
+        scene.classList.add("flex");
+    });
 })
 
 // Click on book / cover flips the card open/close

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday</title>
+    <title>Care Party</title>
+    <link rel="icon" type="image/x-icon" href="./icon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-    <main class="scene">
+    <main class="scene hidden" id="scene">
         <div id="book" class="book">
             <div class="spine"></div>
 
@@ -33,6 +34,31 @@
             </div>
         </div>
     </main>
+    <section class="loading w-full flex" id="loading">
+        <div class="star-wrapper m-auto" style="width: 100px; height: 100px;">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="star-icon"
+          >
+            <path
+              d="M12 2L14.8 8.6L22 9.2L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.2L9.2 8.6L12 2Z"
+              fill="url(#star-gradient)"
+              stroke="#FFFFFF"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="star-gradient" x1="2" y1="2" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFD700" />
+                <stop offset="50%" stop-color="#FF69B4" />
+                <stop offset="100%" stop-color="#87CEEB" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+    </section>
 </body>
 <script type="module" src="./index.js"></script>
 </html>
